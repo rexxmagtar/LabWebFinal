@@ -1,6 +1,5 @@
 #include "json_handler.h"
 #include "file_lock.h"
-#include "system_error.h"
 #include <dirent.h>
 #include <unistd.h>
 #include <fcntl.h>

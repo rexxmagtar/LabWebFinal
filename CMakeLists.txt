@@ -4,7 +4,7 @@ project(json)
 set(LIB_SOURCES ${PROJECT_SOURCE_DIR}/src/json.cpp) 
 set(LIB_HEADERS ${PROJECT_SOURCE_DIR}/include/json.h)
 set(FCGI_SOURCES ${PROJECT_SOURCE_DIR}/src/fcgi_handler.cpp ${PROJECT_SOURCE_DIR}/src/file_lock.cpp ${PROJECT_SOURCE_DIR}/src/json_handler.cpp ${PROJECT_SOURCE_DIR}/src/fcgi_main.cpp)
-set(FCGI_HEADERS ${PROJECT_SOURCE_DIR}/include/fcgi_handler.h ${PROJECT_SOURCE_DIR}/include/file_lock.h ${PROJECT_SOURCE_DIR}/include/json_handler.h)
+set(FCGI_HEADERS ${PROJECT_SOURCE_DIR}/include/fcgi_handler.h  ${PROJECT_SOURCE_DIR}/include/json_handler.h)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)

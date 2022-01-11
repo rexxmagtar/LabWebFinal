@@ -28,3 +28,4 @@ add_executable(fcgi ${FCGI_SOURCES} ${FCGI_HEADERS} ${LIB_HEADERS})
 target_link_libraries(fcgi json fastcgipp)
 set_target_properties(fcgi PROPERTIES OUTPUT_NAME script.fcgi)
 
+

@@ -34,7 +34,7 @@ file_name_from_id(long long id)
     return json_root + "/" + std::to_string(id);
 }
 
-} // namespace
+} 
 
 bool
 insert_new_doc(const std::string &json, long long &id)
@@ -42,7 +42,7 @@ insert_new_doc(const std::string &json, long long &id)
     try {
         json::value val = json::parse(json);
 
-        file_lock_guard flg(json_root, file_lock::lock_mode::write);
+     
         std::vector<std::string> files = get_all_files_in_jsons_dir();
         id = 0;
         for (std::size_t i = 0; i < files.size(); ++i) {
@@ -65,12 +65,11 @@ get_doc_if_exists(json::value &val, long long id)
 {
     std::string file_name = file_name_from_id(id);
     
-    file_lock_guard dflg(json_root, file_lock::lock_mode::read);
+  
     int ret = access(file_name.c_str(), F_OK);
     if (0 != ret)
         return false;
-    
-    file_lock_guard fflg(file_name, file_lock::lock_mode::read);
+
     val = json::parse_file(file_name);
     return true;
 }
@@ -80,7 +79,6 @@ update_doc_if_exists(const std::string &json, long long id)
 {
     std::string file_name = file_name_from_id(id);
     
-    file_lock_guard dflg(json_root, file_lock::lock_mode::write);
     int ret = access(file_name.c_str(), F_OK);
     if (0 != ret)
         return false;
@@ -97,7 +95,6 @@ delete_doc_if_exists(long long id)
 {
     std::string file_name = file_name_from_id(id);
     
-    file_lock_guard dflg(json_root, file_lock::lock_mode::write);
     int ret = access(file_name.c_str(), F_OK);
     if (0 != ret)
         return false;
@@ -110,7 +107,7 @@ json::array
 get_by_predicate(std::function<bool (const json::value &)> pred)
 {
     json::array arr;
-    file_lock_guard dflg(json_root, file_lock::lock_mode::read);
+    
     std::vector<std::string> files = get_all_files_in_jsons_dir();
     for (const std::string &file: files) {
         std::string abs_name = json_root + "/" + file;

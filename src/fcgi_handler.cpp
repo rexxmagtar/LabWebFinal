@@ -1,4 +1,7 @@
 #include "fcgi_handler.h"
+
+#include <string>
+
 #include "json.h"
 #include "json_handler.h"
 

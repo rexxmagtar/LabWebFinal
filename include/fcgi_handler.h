@@ -15,23 +15,10 @@ private:
         static_cast<std::size_t>(LAB_FINAL_POST_LENGTH);
 #endif
 
-    bool no_content_response();
-    bool bad_request_response();
-    bool not_found_response();
-    bool not_allowed_response(
-        const std::vector<Fastcgipp::Http::RequestMethod> &methods
-    );
-    bool internal_server_error_response(const std::string &msg);
-
     bool create_response();
     bool get_one_response(long long id);
-    bool update_response(long long id);
-    bool delete_response(long long id);
     bool get_all_response();
-    bool get_k_response(const std::string &key);
-    bool get_kv_response(const std::string &key, const std::string &value);
     bool id_response(long long id);
-    bool no_id_response();
     bool response();
     bool inProcessor();
 

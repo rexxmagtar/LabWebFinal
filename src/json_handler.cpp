@@ -16,8 +16,7 @@ get_all_files_in_jsons_dir()
 {
     std::vector<std::string> result;
     DIR *dir_str = opendir(json_root.c_str());
-    if (!dir_str)
-       throw system_error(errno);
+
     struct dirent *file_info;
     errno = 0;
     while (NULL != (file_info = readdir(dir_str))) {
@@ -25,8 +24,7 @@ get_all_files_in_jsons_dir()
             result.emplace_back(file_info->d_name);
         errno = 0;
     }
-    if (0 != errno)
-        throw system_error(errno);
+
     closedir(dir_str);
     return result;
 }
@@ -105,8 +103,7 @@ delete_doc_if_exists(long long id)
     if (0 != ret)
         return false;
     ret = unlink(file_name.c_str());
-    if (0 != ret)
-        throw system_error(errno);
+
     return true;
 }
 

@@ -28,9 +28,3 @@ add_executable(fcgi ${FCGI_SOURCES} ${FCGI_HEADERS} ${LIB_HEADERS})
 target_link_libraries(fcgi json fastcgipp)
 set_target_properties(fcgi PROPERTIES OUTPUT_NAME script.fcgi)
 
-enable_testing()
-add_executable(json_test )
-target_link_libraries(json_test gtest_main json)
-
-include(GoogleTest)
-gtest_discover_tests(json_test)

@@ -7,14 +7,13 @@ bool
 fcgi_handler::create_response()
 {
     auto body_pos = environment().posts.find("body");
-
+    if (body_pos == environment().posts.end())
+        return bad_request_response();
     std::string &body = body_pos->second;
     long long id;
-    bool ok = json_handler::insert_new_doc(body, id);
+    json_handler::insert_new_doc(body, id);
 
-    out << "Status: 201 Created\r\n"
-           "Content-Type: text/plain\r\n\r\n"
-           "Document-Id=" << id;
+    out << "File created";
     return true;
 }
 
@@ -23,9 +22,8 @@ fcgi_handler::get_one_response(long long id)
 {
     json::value val;
     bool exists = json_handler::get_doc_if_exists(val, id);
- 
-    out << "Content-Type: application/json\r\n\r\n"
-        << json::to_string(val);
+
+    out  << json::to_string(val);
     return true;
 }
 
@@ -36,37 +34,45 @@ fcgi_handler::get_all_response()
     auto docs = json_handler::get_by_predicate(
         [](const json::value &val) { return true; }
     );
-
+    if (docs.empty())
+        return no_content_response();
     out << "Content-Type: application/json\r\n\r\n"
         << json::to_string(docs);
     return true;
 }
 
-
 bool
 fcgi_handler::id_response(long long id)
 {
         return get_one_response(id);
-   
+}
+
+bool 
+fcgi_handler::no_id_response()
+{
+    auto &gets = environment().gets;
+    switch (environment().requestMethod) {
+    case Fastcgipp::Http::RequestMethod::GET: {
+                return get_all_response();
+        }
+    case Fastcgipp::Http::RequestMethod::POST:
+        return create_response();
+    }
 }
 
 bool
 fcgi_handler::response()
 {
     auto id = environment().gets.find("id");
+    if (id != environment().gets.end())
         return id_response(std::stoll(id->second));
-
+    else
+        return no_id_response(); 
 }
 
 bool
 fcgi_handler::inProcessor()
 {
-    static const std::string textPlain = "text/plain";
-    static const std::string appJson = "application/json";
-    if (environment().contentType != textPlain &&
-        environment().contentType != appJson) {
-        return false;
-    }
     
     std::string body_contents(
         environment().postBuffer().begin(),

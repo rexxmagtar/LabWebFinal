@@ -37,12 +37,6 @@ private:
     bool inProcessor();
 
 public:
-    fcgi_handler() : Fastcgipp::Request<char>(post_length)
-    {
-
-    };
-
-    virtual ~fcgi_handler(){}
 };
 
 #endif // _LAB_FINAL_FCGI_HANDLER_H_

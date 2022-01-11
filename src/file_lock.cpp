@@ -35,8 +35,7 @@ file_lock::file_lock(const std::string &file_name, lock_mode mode)
     : fd(0), is_locked(false), mode(mode)
 {
     char *abs_path = realpath(file_name.c_str(), nullptr);
-    if (!abs_path)
-        throw system_error(errno);
+    
     for (char *p = abs_path; *p; ++p) {
         if ('/' == *p)
             *p = '-';

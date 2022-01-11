@@ -3,7 +3,6 @@
 
 #include <fastcgi++/request.hpp>
 #include <bits/stdc++.h>
-#include <string>
 
 class fcgi_handler: public Fastcgipp::Request<char>
 {
@@ -37,6 +36,8 @@ private:
     bool inProcessor();
 
 public:
+    fcgi_handler()
+        : Fastcgipp::Request<char>(post_length) {}
 };
 
 #endif // _LAB_FINAL_FCGI_HANDLER_H_

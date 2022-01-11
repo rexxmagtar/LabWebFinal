@@ -1,5 +1,5 @@
 #include "file_lock.h"
-#include "system_error.h"
+
 #include <unistd.h>
 #include <sys/file.h>
 #include <stdlib.h>
@@ -35,8 +35,7 @@ file_lock::file_lock(const std::string &file_name, lock_mode mode)
     : fd(0), is_locked(false), mode(mode)
 {
     char *abs_path = realpath(file_name.c_str(), nullptr);
-    if (!abs_path)
-        throw system_error(errno);
+
     for (char *p = abs_path; *p; ++p) {
         if ('/' == *p)
             *p = '-';
@@ -45,13 +44,8 @@ file_lock::file_lock(const std::string &file_name, lock_mode mode)
     std::strcat(lock_file_path, abs_path);
     std::free(abs_path);
     rw_fd = open(lock_file_path, O_CREAT|O_RDONLY, 0700);
-    if (-1 == rw_fd)
-        throw system_error(errno);
     fd = open(file_name.c_str(), O_RDONLY);
-    if (-1 == fd) {
-        close(rw_fd);
-        throw system_error(errno);
-    }
+
 }
 
 file_lock::~file_lock()
@@ -66,8 +60,7 @@ void
 file_lock::lock()
 {
     int ret = do_syslock();
-    if (-1 == ret)
-        throw system_error(errno);
+    
 }
 
 bool

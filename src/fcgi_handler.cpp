@@ -7,8 +7,7 @@ bool
 fcgi_handler::create_response()
 {
     auto body_pos = environment().posts.find("body");
-    if (body_pos == environment().posts.end())
-        return bad_request_response();
+
     std::string &body = body_pos->second;
     long long id;
     json_handler::insert_new_doc(body, id);
@@ -34,8 +33,7 @@ fcgi_handler::get_all_response()
     auto docs = json_handler::get_by_predicate(
         [](const json::value &val) { return true; }
     );
-    if (docs.empty())
-        return no_content_response();
+	
     out << "Content-Type: application/json\r\n\r\n"
         << json::to_string(docs);
     return true;

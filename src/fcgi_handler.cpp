@@ -8,7 +8,7 @@ fcgi_handler::create_response()
 {
     auto body_pos = environment().posts.find("body");
     if (body_pos == environment().posts.end())
-        return bad_request_response();
+        return false;
     std::string &body = body_pos->second;
     long long id;
     bool ok = json_handler::insert_new_doc(body, id);

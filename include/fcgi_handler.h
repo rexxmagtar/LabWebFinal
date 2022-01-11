@@ -3,6 +3,7 @@
 
 #include <fastcgi++/request.hpp>
 #include <bits/stdc++.h>
+#include <string>
 
 class fcgi_handler: public Fastcgipp::Request<char>
 {
@@ -40,6 +41,8 @@ public:
     {
 
     };
+
+    virtual ~fcgi_handler(){}
 };
 
 #endif // _LAB_FINAL_FCGI_HANDLER_H_

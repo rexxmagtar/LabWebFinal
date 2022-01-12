@@ -4,7 +4,7 @@
 
 
 bool
-webServer::create_response()
+webServer::addFile_request()
 {
     auto body_pos = environment().posts.find("body");
 
@@ -17,7 +17,7 @@ webServer::create_response()
 }
 
 bool
-webServer::get_one_response(long long id)
+webServer::get_by_id_request(long long id)
 {
     json::value val;
     bool exists = fileManager::get_doc_if_exists(val, id);
@@ -28,7 +28,7 @@ webServer::get_one_response(long long id)
 
 
 bool
-webServer::get_all_response()
+webServer::get_all_files_request()
 {
     auto docs = fileManager::get_by_predicate(
         [](const json::value &val) { return true; }
@@ -42,7 +42,7 @@ webServer::get_all_response()
 bool
 webServer::id_response(long long id)
 {
-        return get_one_response(id);
+        return get_by_id_request(id);
 }
 
 bool 
@@ -51,10 +51,10 @@ webServer::no_id_response()
     auto &gets = environment().gets;
     switch (environment().requestMethod) {
     case Fastcgipp::Http::RequestMethod::GET: {
-                return get_all_response();
+                return get_all_files_request();
         }
     case Fastcgipp::Http::RequestMethod::POST:
-        return create_response();
+        return addFile_request();
     }
 }
 
@@ -63,9 +63,18 @@ webServer::response()
 {
     auto id = environment().gets.find("id");
     if (id != environment().gets.end())
-        return id_response(std::stoll(id->second));
+        return  get_by_id_request(std::stoll(id->second));
     else
-        return no_id_response(); 
+        {
+        auto& gets = environment().gets;
+        switch (environment().requestMethod) {
+        case Fastcgipp::Http::RequestMethod::GET: {
+            return get_all_files_request();
+        }
+        case Fastcgipp::Http::RequestMethod::POST:
+            return addFile_request();
+        }
+    }
 }
 
 bool

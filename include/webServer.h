@@ -8,16 +8,14 @@ class webServer: public Fastcgipp::Request<char>
 {
 private:
 
-    static const std::size_t post_length = 
-        static_cast<std::size_t>(-1);
-
-    bool create_response();
-    bool get_one_response(long long id);
-    bool get_all_response();
-    bool id_response(long long id);
-    bool no_id_response();
+    bool get_by_id_request(long long id);
+    bool get_all_files_request();
+    bool addFile_request();
     bool response();
     bool inProcessor();
+
+    static const int post_length =
+       -1;
 
 public:
     webServer()

@@ -150,6 +150,4 @@ public:
 value parse(const std::string &json);
 value parse_file(const std::string &json_file);
 
-} // namespace json
-
- // _LAB2_json_H_
+} 

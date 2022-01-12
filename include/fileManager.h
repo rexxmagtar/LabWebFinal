@@ -1,10 +1,10 @@
-#ifndef _LAB_FINAL_JSON_HANDLER_H_
-#define _LAB_FINAL_JSON_HANDLER_H_
+#ifndef _LAB_FINAL_fileManager_H_
+#define _LAB_FINAL_fileManager_H_
 
 #include "JSON.h"
 #include <bits/stdc++.h>
 
-namespace JSON_handler 
+namespace fileManager 
 {
 #ifndef LAB_FINAL_SERVER_ROOT
     static const std::string server_root = "/var/www/JSON-docs";

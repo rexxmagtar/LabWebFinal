@@ -3,7 +3,7 @@
 
 #include <bits/stdc++.h>
 
-namespace json
+namespace JSON
 {
 
 class _value_wrapper;
@@ -147,9 +147,9 @@ public:
         : parse_exception(expected_msg(expected, found)) {}
 };
 
-value parse(const std::string &json);
-value parse_file(const std::string &json_file);
+value parse(const std::string &JSON);
+value parse_file(const std::string &JSON_file);
 
-} // namespace json
+} // namespace JSON
 
 #endif // _LAB2_JSON_H_

@@ -1,5 +1,5 @@
-
-
+#ifndef _LAB2_JSON_H_
+#define _LAB2_JSON_H_
 
 #include <bits/stdc++.h>
 
@@ -150,4 +150,6 @@ public:
 value parse(const std::string &json);
 value parse_file(const std::string &json_file);
 
-} 
+} // namespace json
+
+#endif // _LAB2_JSON_H_

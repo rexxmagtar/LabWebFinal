@@ -103,5 +103,23 @@ delete_doc_if_exists(long long id)
     return true;
 }
 
+json::array
+get_by_predicate(std::function<bool (const json::value &)> pred)
+{
+    json::array arr;
+    
+    std::vector<std::string> files = get_all_files_in_jsons_dir();
+    for (const std::string &file: files) {
+        std::string abs_name = json_root + "/" + file;
+        json::value val = json::parse_file(abs_name);
+        if (pred(val)) {
+            arr.push_back(json::object {
+                { "id", json::integer(std::stoll(file)) },
+                { "document", val }
+            } );
+        }
+    }
+    return arr;
+}
 
 } 

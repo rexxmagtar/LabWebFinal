@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(json)
 set(LIB_SOURCES ${PROJECT_SOURCE_DIR}/src/json.cpp) 
 set(LIB_HEADERS ${PROJECT_SOURCE_DIR}/include/json.h)
-set(FCGI_SOURCES ${PROJECT_SOURCE_DIR}/src/webServer.cpp  ${PROJECT_SOURCE_DIR}/src/fileManager.cpp ${PROJECT_SOURCE_DIR}/src/fcgi_main.cpp)
+set(FCGI_SOURCES ${PROJECT_SOURCE_DIR}/src/webServer.cpp  ${PROJECT_SOURCE_DIR}/src/fileManager.cpp ${PROJECT_SOURCE_DIR}/src/main.cpp)
 set(FCGI_HEADERS ${PROJECT_SOURCE_DIR}/include/webServer.h  ${PROJECT_SOURCE_DIR}/include/fileManager.h)
 
 set(CMAKE_CXX_STANDARD 17)

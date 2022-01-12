@@ -1,5 +1,5 @@
-#ifndef _LAB_FINAL_webServer_H_
-#define _LAB_FINAL_webServer_H_
+
+
 
 #include <fastcgi++/request.hpp>
 #include <bits/stdc++.h>
@@ -22,4 +22,4 @@ public:
         : Fastcgipp::Request<char>(post_length) {}
 };
 
-#endif 
+ 

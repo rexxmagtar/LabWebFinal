@@ -1,10 +1,10 @@
 #include <fastcgi++/manager.hpp>
-#include "fcgi_handler.h"
+#include "webServer.h"
 
 int 
 main()
 {
-    Fastcgipp::Manager<fcgi_handler> manager;
+    Fastcgipp::Manager<webServer> manager;
     manager.setupSignals();
     manager.listen();
     manager.start();

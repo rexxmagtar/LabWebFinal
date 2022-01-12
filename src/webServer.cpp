@@ -1,10 +1,10 @@
-#include "fcgi_handler.h"
+#include "webServer.h"
 #include "json.h"
 #include "json_handler.h"
 
 
 bool
-fcgi_handler::create_response()
+webServer::create_response()
 {
     auto body_pos = environment().posts.find("body");
 
@@ -17,7 +17,7 @@ fcgi_handler::create_response()
 }
 
 bool
-fcgi_handler::get_one_response(long long id)
+webServer::get_one_response(long long id)
 {
     json::value val;
     bool exists = json_handler::get_doc_if_exists(val, id);
@@ -28,7 +28,7 @@ fcgi_handler::get_one_response(long long id)
 
 
 bool
-fcgi_handler::get_all_response()
+webServer::+get_all_response()
 {
     auto docs = json_handler::get_by_predicate(
         [](const json::value &val) { return true; }
@@ -40,13 +40,13 @@ fcgi_handler::get_all_response()
 }
 
 bool
-fcgi_handler::id_response(long long id)
+webServer::id_response(long long id)
 {
         return get_one_response(id);
 }
 
 bool 
-fcgi_handler::no_id_response()
+webServer::no_id_response()
 {
     auto &gets = environment().gets;
     switch (environment().requestMethod) {
@@ -59,7 +59,7 @@ fcgi_handler::no_id_response()
 }
 
 bool
-fcgi_handler::response()
+webServer::response()
 {
     auto id = environment().gets.find("id");
     if (id != environment().gets.end())
@@ -69,7 +69,7 @@ fcgi_handler::response()
 }
 
 bool
-fcgi_handler::inProcessor()
+webServer::inProcessor()
 {
     
     std::string body_contents(

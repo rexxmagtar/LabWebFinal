@@ -9,7 +9,7 @@ class fcgi_handler: public Fastcgipp::Request<char>
 private:
 
     static const std::size_t post_length = 
-        static_cast<std::size_t>(LAB_FINAL_POST_LENGTH);
+        static_cast<std::size_t>(-1);
 
     bool create_response();
     bool get_one_response(long long id);

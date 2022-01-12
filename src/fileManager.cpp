@@ -12,10 +12,10 @@ namespace
 {
 
 std::vector<std::string>
-get_all_files_in_JSONs_dir()
+get_all_files_in_jsons_dir()
 {
     std::vector<std::string> result;
-    DIR *dir_str = opendir(JSON_root.c_str());
+    DIR *dir_str = opendir(json_root.c_str());
 
     struct dirent *file_info;
     errno = 0;
@@ -32,19 +32,19 @@ get_all_files_in_JSONs_dir()
 std::string
 file_name_from_id(long long id)
 {
-    return JSON_root + "/" + std::to_string(id);
+    return json_root + "/" + std::to_string(id);
 }
 
 } 
 
 bool
-insert_new_doc(const std::string &JSON, long long &id)
+insert_new_doc(const std::string &json, long long &id)
 {
     try {
-        JSON::value val = JSON::parse(JSON);
+        json::value val = json::parse(json);
 
      
-        std::vector<std::string> files = get_all_files_in_JSONs_dir();
+        std::vector<std::string> files = get_all_files_in_jsons_dir();
         id = 0;
         for (std::size_t i = 0; i < files.size(); ++i) {
             long long new_id = std::stoll(files[i]);
@@ -53,7 +53,7 @@ insert_new_doc(const std::string &JSON, long long &id)
         }
         ++id;
         std::ofstream str(file_name_from_id(id));
-        str << JSON;
+        str << json;
     } catch (std::exception &ex) {
         return false;
     }
@@ -62,7 +62,7 @@ insert_new_doc(const std::string &JSON, long long &id)
 }
 
 bool
-get_doc_if_exists(JSON::value &val, long long id)
+get_doc_if_exists(json::value &val, long long id)
 {
     std::string file_name = file_name_from_id(id);
     
@@ -71,22 +71,22 @@ get_doc_if_exists(JSON::value &val, long long id)
     if (0 != ret)
         return false;
 
-    val = JSON::parse_file(file_name);
+    val = json::parse_file(file_name);
     return true;
 }
 
-JSON::array
-get_by_predicate(std::function<bool (const JSON::value &)> pred)
+json::array
+get_by_predicate(std::function<bool (const json::value &)> pred)
 {
-    JSON::array arr;
+    json::array arr;
     
-    std::vector<std::string> files = get_all_files_in_JSONs_dir();
+    std::vector<std::string> files = get_all_files_in_jsons_dir();
     for (const std::string &file: files) {
-        std::string abs_name = JSON_root + "/" + file;
-        JSON::value val = JSON::parse_file(abs_name);
+        std::string abs_name = json_root + "/" + file;
+        json::value val = json::parse_file(abs_name);
         if (pred(val)) {
-            arr.push_back(JSON::object {
-                { "id", JSON::integer(std::stoll(file)) },
+            arr.push_back(json::object {
+                { "id", json::integer(std::stoll(file)) },
                 { "document", val }
             } );
         }

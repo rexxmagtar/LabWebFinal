@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include "JSON.h"
+#include "json.h"
 
-namespace JSON 
+namespace json 
 {
 
 namespace 
@@ -415,15 +415,15 @@ incorrect_token::expected_msg(token_type expected, const token &found)
 }
 
 value
-parse(const std::string &JSON)
+parse(const std::string &json)
 {
-    return parse_string(JSON);
+    return parse_string(json);
 }
 
 value
-parse_file(const std::string &JSON_file)
+parse_file(const std::string &json_file)
 {
-    std::ifstream str(JSON_file, std::ios::binary);
+    std::ifstream str(json_file, std::ios::binary);
     std::string contents;
     std::getline(str, contents, '\0');
     if (!str.eof())
@@ -431,4 +431,4 @@ parse_file(const std::string &JSON_file)
     return parse_string(contents);
 }
 
-} // namespace JSON
+} // namespace json

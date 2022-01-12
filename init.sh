@@ -1,12 +1,12 @@
 #!/bin/sh
 
-SCR_SERVER_PATH=/var/www/JSON-docs
+SCR_SERVER_PATH=/var/www/json-docs
 if [[ ! -z "${SERVER_PATH}" ]]; then
     SCR_SERVER_PATH="$SERVER_PATH"
 fi
 echo "Creating the server root directory ($SCR_SERVER_PATH)..."
 sudo mkdir -p "$SCR_SERVER_PATH"
-sudo mkdir -p "$SCR_SERVER_PATH/JSONs"
+sudo mkdir -p "$SCR_SERVER_PATH/jsons"
 sudo mkdir -p "$SCR_SERVER_PATH/fcgi"
 echo "Copying the script.fcgi to $SCR_SERVER_PATH/fcgi..."
 sudo cp build/script.fcgi "$SCR_SERVER_PATH/fcgi"

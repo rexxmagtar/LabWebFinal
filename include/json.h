@@ -1,9 +1,9 @@
-#ifndef _LAB2_JSON_H_
-#define _LAB2_JSON_H_
+#ifndef _LAB2_json_H_
+#define _LAB2_json_H_
 
 #include <bits/stdc++.h>
 
-namespace JSON
+namespace json
 {
 
 class _value_wrapper;
@@ -147,9 +147,9 @@ public:
         : parse_exception(expected_msg(expected, found)) {}
 };
 
-value parse(const std::string &JSON);
-value parse_file(const std::string &JSON_file);
+value parse(const std::string &json);
+value parse_file(const std::string &json_file);
 
-} // namespace JSON
+} // namespace json
 
-#endif // _LAB2_JSON_H_
+#endif // _LAB2_json_H_

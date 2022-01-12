@@ -1,5 +1,5 @@
 #include "webServer.h"
-#include "JSON.h"
+#include "json.h"
 #include "fileManager.h"
 
 
@@ -19,10 +19,10 @@ webServer::create_response()
 bool
 webServer::get_one_response(long long id)
 {
-    JSON::value val;
+    json::value val;
     bool exists = fileManager::get_doc_if_exists(val, id);
 
-    out  << JSON::to_string(val);
+    out  << json::to_string(val);
     return true;
 }
 
@@ -31,11 +31,11 @@ bool
 webServer::get_all_response()
 {
     auto docs = fileManager::get_by_predicate(
-        [](const JSON::value &val) { return true; }
+        [](const json::value &val) { return true; }
     );
 	
-    out << "Content-Type: application/JSON\r\n\r\n"
-        << JSON::to_string(docs);
+    out << "Content-Type: application/json\r\n\r\n"
+        << json::to_string(docs);
     return true;
 }
 

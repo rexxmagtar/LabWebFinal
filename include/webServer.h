@@ -1,10 +1,10 @@
-#ifndef _LAB_FINAL_FCGI_HANDLER_H_
-#define _LAB_FINAL_FCGI_HANDLER_H_
+#ifndef _LAB_FINAL_webServer_H_
+#define _LAB_FINAL_webServer_H_
 
 #include <fastcgi++/request.hpp>
 #include <bits/stdc++.h>
 
-class fcgi_handler: public Fastcgipp::Request<char>
+class webServer: public Fastcgipp::Request<char>
 {
 private:
 
@@ -20,7 +20,7 @@ private:
     bool inProcessor();
 
 public:
-    fcgi_handler()
+    webServer()
         : Fastcgipp::Request<char>(post_length) {}
 };
 

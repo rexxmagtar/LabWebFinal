@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(json)
+project(JSON)
 set(LIB_SOURCES ${PROJECT_SOURCE_DIR}/src/JSON.cpp) 
 set(LIB_HEADERS ${PROJECT_SOURCE_DIR}/include/JSON.h)
-set(FCGI_SOURCES ${PROJECT_SOURCE_DIR}/src/webServer.cpp  ${PROJECT_SOURCE_DIR}/src/json_handler.cpp ${PROJECT_SOURCE_DIR}/src/fcgi_main.cpp)
-set(FCGI_HEADERS ${PROJECT_SOURCE_DIR}/include/webServer.h  ${PROJECT_SOURCE_DIR}/include/json_handler.h)
+set(FCGI_SOURCES ${PROJECT_SOURCE_DIR}/src/webServer.cpp  ${PROJECT_SOURCE_DIR}/src/JSON_handler.cpp ${PROJECT_SOURCE_DIR}/src/fcgi_main.cpp)
+set(FCGI_HEADERS ${PROJECT_SOURCE_DIR}/include/webServer.h  ${PROJECT_SOURCE_DIR}/include/JSON_handler.h)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
@@ -19,12 +19,12 @@ FetchContent_MakeAvailable(googletest)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-add_library(json STATIC ${LIB_SOURCES} ${LIB_HEADERS})
+add_library(JSON STATIC ${LIB_SOURCES} ${LIB_HEADERS})
 
 add_executable(main ${PROJECT_SOURCE_DIR}/src/main.cpp ${LIB_HEADERS})
-target_link_libraries(main json)
+target_link_libraries(main JSON)
 
 add_executable(fcgi ${FCGI_SOURCES} ${FCGI_HEADERS} ${LIB_HEADERS})
-target_link_libraries(fcgi json fastcgipp)
+target_link_libraries(fcgi JSON fastcgipp)
 set_target_properties(fcgi PROPERTIES OUTPUT_NAME script.fcgi)
 

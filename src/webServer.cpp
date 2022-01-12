@@ -1,6 +1,6 @@
 #include "webServer.h"
-#include "json.h"
-#include "json_handler.h"
+#include "JSON.h"
+#include "JSON_handler.h"
 
 
 bool
@@ -10,7 +10,7 @@ webServer::create_response()
 
     std::string &body = body_pos->second;
     long long id;
-    json_handler::insert_new_doc(body, id);
+    JSON_handler::insert_new_doc(body, id);
 
     out << "File created";
     return true;
@@ -19,10 +19,10 @@ webServer::create_response()
 bool
 webServer::get_one_response(long long id)
 {
-    json::value val;
-    bool exists = json_handler::get_doc_if_exists(val, id);
+    JSON::value val;
+    bool exists = JSON_handler::get_doc_if_exists(val, id);
 
-    out  << json::to_string(val);
+    out  << JSON::to_string(val);
     return true;
 }
 
@@ -30,12 +30,12 @@ webServer::get_one_response(long long id)
 bool
 webServer::+get_all_response()
 {
-    auto docs = json_handler::get_by_predicate(
-        [](const json::value &val) { return true; }
+    auto docs = JSON_handler::get_by_predicate(
+        [](const JSON::value &val) { return true; }
     );
 	
-    out << "Content-Type: application/json\r\n\r\n"
-        << json::to_string(docs);
+    out << "Content-Type: application/JSON\r\n\r\n"
+        << JSON::to_string(docs);
     return true;
 }
 

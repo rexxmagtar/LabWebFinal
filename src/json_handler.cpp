@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <functional>
 
 namespace json_handler
 {
@@ -71,35 +72,6 @@ get_doc_if_exists(json::value &val, long long id)
         return false;
 
     val = json::parse_file(file_name);
-    return true;
-}
-
-bool
-update_doc_if_exists(const std::string &json, long long id)
-{
-    std::string file_name = file_name_from_id(id);
-    
-    int ret = access(file_name.c_str(), F_OK);
-    if (0 != ret)
-        return false;
-    json::value val = json::parse(json);
-    std::ofstream str(
-        file_name, std::ios_base::out | std::ios_base::trunc
-    );
-    str << json;
-    return true;
-}
-
-bool
-delete_doc_if_exists(long long id)
-{
-    std::string file_name = file_name_from_id(id);
-    
-    int ret = access(file_name.c_str(), F_OK);
-    if (0 != ret)
-        return false;
-    ret = unlink(file_name.c_str());
-
     return true;
 }
 

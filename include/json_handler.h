@@ -15,8 +15,6 @@ namespace json_handler
     
     bool insert_new_doc(const std::string &json, long long &id);
     bool get_doc_if_exists(json::value &val, long long id);
-    bool update_doc_if_exists(const std::string &json, long long id);
-    bool delete_doc_if_exists(long long id);
-    json::array get_by_predicate(std::function<bool (const json::value &)> pred);
+     json::array get_by_predicate(std::function<bool (const json::value &)> pred);
 } 
 #endif 

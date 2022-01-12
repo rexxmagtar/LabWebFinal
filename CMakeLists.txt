@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(json)
 set(LIB_SOURCES ${PROJECT_SOURCE_DIR}/src/json.cpp) 
-set(LIB_HEADERS ${PROJECT_SOURCE_DIR}/include/json.h)
+set(LIB_HEADERS "include/JSON.h")
 set(FCGI_SOURCES ${PROJECT_SOURCE_DIR}/src/fcgi_handler.cpp  ${PROJECT_SOURCE_DIR}/src/json_handler.cpp ${PROJECT_SOURCE_DIR}/src/fcgi_main.cpp)
 set(FCGI_HEADERS ${PROJECT_SOURCE_DIR}/include/fcgi_handler.h  ${PROJECT_SOURCE_DIR}/include/json_handler.h)
 
